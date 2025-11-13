@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1yinr3imc1lt"]
+
+[ext_resource type="Script" uid="uid://b0ffwtb8qdhvf" path="res://Godot-modules/2D/Velocity/Velocity2dScript.gd" id="1_sq0wi"]
+
+[sub_resource type="Curve" id="Curve_wb7f4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Velocity2DModule" type="Node2D" node_paths=PackedStringArray("controlledNode")]
+script = ExtResource("1_sq0wi")
+controlledNode = NodePath("")
+accellerationCurve = SubResource("Curve_wb7f4")
