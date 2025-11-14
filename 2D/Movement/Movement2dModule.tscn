@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://gng3fpsmykn2"]
+
+[ext_resource type="Script" uid="uid://dkqgkda0v6e2c" path="res://Godot-modules/2D/Movement/Movement2dScript.gd" id="1_rmmvw"]
+
+[node name="Movement2DModule" type="Node" node_paths=PackedStringArray("controlledNode", "velocityModule")]
+script = ExtResource("1_rmmvw")
+controlledNode = NodePath("")
+velocityModule = NodePath("")

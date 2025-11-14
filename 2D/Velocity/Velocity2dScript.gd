@@ -6,8 +6,8 @@ class_name Velocity2dModule extends Node2D
 @export var accelleration: float = 5
 @export var friction: float = 5
 
-@onready var accellCurveStep: float = maxSpeed / accelleration
-@onready var frictionCurveStep: float = maxSpeed / friction
+@onready var accellCurveStep: float = accelleration / maxSpeed
+@onready var frictionCurveStep: float = friction / maxSpeed
 
 @export_group("Accelleration curve")
 @export var accellerationCurve: Curve
@@ -21,10 +21,17 @@ func _ready() -> void:
 	accellCurveStep = clampf(accellCurveStep,0,1)
 	frictionCurveStep = clampf(frictionCurveStep,0,1)
 
+func _physics_process(_delta: float) -> void:
+	controlledNode.move_and_slide()
+
 #region Accelleration functions
 func accellerateToPos(pos: Vector2):
 	accellerateInDirection(controlledNode.global_position.direction_to(pos))
 
+func decellerateToPos(pos: Vector2):
+	decellerateInDirection(controlledNode.global_position.direction_to(pos))
+
+var lastDir := Vector2(0,0)
 func accellerateInDirection(dir: Vector2):
 	dir = dir.normalized()
 	
@@ -32,9 +39,15 @@ func accellerateInDirection(dir: Vector2):
 	if dir != Vector2(0,0):
 		controlledNode.velocity = interpolate(0.0,maxSpeed,accellerationCurve.sample(curveOffset)) * dir
 		curveOffset += accellCurveStep
+		lastDir = dir
 	else:
-		controlledNode.velocity = interpolate(0.0,maxSpeed,accellerationCurve.sample(curveOffset)) * Vector2(1,1) # Vector2(1,1) is used just to convert the interpolation to a vector
-		curveOffset -= frictionCurveStep
+		decellerateInDirection(lastDir)
+	
+	curveOffset = clampf(curveOffset,0,1)
+
+func decellerateInDirection(dir: Vector2):
+	controlledNode.velocity = interpolate(0.0,maxSpeed,accellerationCurve.sample(curveOffset)) * dir
+	curveOffset -= frictionCurveStep
 	
 	curveOffset = clampf(curveOffset,0,1)
 
