@@ -1,1 +1,4 @@
-*.uid
+.import/
+.export/
+.godot/
+*.gd.uid
