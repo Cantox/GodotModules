@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://gng3fpsmykn2"]
 
-[ext_resource type="Script" uid="uid://dkqgkda0v6e2c" path="res://Godot-modules/2D/Movement/Movement2dScript.gd" id="1_rmmvw"]
+[ext_resource type="Script" uid="uid://bbltqsank63te" path="res://Godot-modules/Modules/2D/Movement/Movement2dScript.gd" id="1_6p5p1"]
 
 [node name="Movement2DModule" type="Node"]
-script = ExtResource("1_rmmvw")
+script = ExtResource("1_6p5p1")

@@ -36,6 +36,10 @@ class_name DamageModule extends Node
 @onready var startingCritChance := critChance
 #endregion
 
+func _ready() -> void:
+	if healthModule == null:
+		get_tree().quit(1)
+
 ##Decreases the [param health] parameter of the associated health module 
 ##by the given amount
 func takeDamage(amount: float):

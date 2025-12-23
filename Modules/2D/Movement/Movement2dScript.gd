@@ -15,6 +15,10 @@ class_name Movement2dModule extends Node
 ##If true, accelleration is used to change the velocity gradually
 @export var useAccelleration: bool = false
 
+func _ready() -> void:
+	if controlledNode == null or velocityModule == null:
+		get_tree().quit(1)
+
 #region Directional keys
 ##Moves the controlled node based on a two axis input (vertical and horizontal)
 func fourDirectionalMovement(keyUp: String, keyDown: String, keyLeft: String, keyRight: String, accellerate := useAccelleration):

@@ -9,18 +9,45 @@ This project follows a **composition-over-inheritance** approach, leveraging God
 ## ⭐ Features
 
 ### 2D Modules
-- **Velocity**: modifies velocity of a CharacterBody2d node, accelleration and accelleration curve are implemented.
-- **Movement**: requires velocity module. Takes an input (axis or position) and uses a velocity module to move a CharacterBody2d node based on that input.
+- **Velocity**: Modifies the velocity of a `CharacterBody2D` node. Acceleration and acceleration curves are supported.
 
-### Attributes Modules
-- **Health**: manages an health value. Allows decrementation and incrementation of the value and a death signal is emitted when it reaches 0.
-- **Damage**: requires health module. Allows dealing and taking damage. The base damage can be modified by passing modifiers to the methods. A critical attack is also implemented.
+- **Movement**: Requires the **Velocity** module. Takes an input (axis or mouse position) and moves a `CharacterBody2D` using the linked velocity module.
+
+### Attribute Modules
+- **Health**: Manages a health value with increment/decrement support. Emits a `death` signal when health reaches `0`.
+
+- **Damage**: Requires the **Health** module. Supports dealing and receiving damage, damage modifiers, and critical attacks.
 
 ---
 
 ## 🧩 Installation
 
-[Download](https://github.com/Cantox/GodotModules/archive/refs/heads/main.zip) and unzip the repo. For each needed module copy the corresponding folder (containing module scene (file .tscn) and module script (file .gd)) to your project's folder.
+[Download](https://github.com/Cantox/GodotModules/archive/refs/heads/main.zip) the repository and unzip it.
 
-#### Dependent modules:
-Some modules require other modules to work (ex. the Movement2D module requires the Velocity2D module). In those cases, after importing the module that you need, you will also have to import the required modules (which i'll call dependencies). Add the dependencies to the scene tree as siblings of the module. Finally, in the inspector tab, associate the dependencies to the corresponding attributes of the module.
+### For each module you want to use:
+
+- Copy the **corresponding module folder** (containing the `.tscn` scene and `.gd` script) into your project folder.
+
+- **Open** the module’s scene (`.tscn` file).
+
+    <details>
+    <summary><strong>If dependency errors appear and the script won’t load</strong></summary>
+
+    - Open the scene anyway (without loading the script)
+    - Reassociate the script with the module *(drag the `.gd` file onto the module’s node)*
+    - Save the scene
+
+    </details>
+
+- **Add** the module’s scene to your scene tree
+
+- **Configure** the module’s exported properties from the **Inspector** tab
+---
+
+### Modules with dependencies
+
+Some modules depend on others (e.g. **Movement2D** requires **Velocity2D**).   
+In these cases:
+- Import **both** the module and its dependencies
+- Add dependency modules as **siblings** in the scene tree
+- Assign dependencies in the **Inspector** by linking them to the module’s exported fields
