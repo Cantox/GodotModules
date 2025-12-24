@@ -3,13 +3,13 @@ class_name DamageModule extends Node
 ##
 ##Allows to take damage and deal damage with a crit chance
 
-##The module on which the health is changed
+##The [healthModule] on which the health is changed
 @export var healthModule: HealthModule
 
 #region Variables
 @export_group("Damage")
 ##The base amount of damage dealt
-@export var damageDealt: float = 50
+@export var baseDamage: float = 50
 @export_group("Critical attacks")
 ##If false, there won't be a chance to deal critical attacks
 @export var useCriticalAttacks: bool = true
@@ -30,7 +30,7 @@ class_name DamageModule extends Node
 
 ##Variables that save the starting values
 ##Can be used to reset values after modifications (by powerups for example)
-@onready var startingDamage := damageDealt
+@onready var startingDamage := baseDamage
 @onready var startingCritMult := critMultiplyValue
 @onready var startingCritInc := critIncrementValue
 @onready var startingCritChance := critChance
@@ -47,17 +47,17 @@ func takeDamage(amount: float):
 
 ##Deals damage (calculated by the [method DamageModule.calculateDamage] method) to a health module 
 ##(decreasing it's [param health] parameter)
-func dealDamageToHealthModule(otherHealthModule: HealthModule, damageIncreasers: Array[float] = [], damageMultiplyers: Array[float] = [], customBaseDamage: float = damageDealt):
+func dealDamageToHealthModule(otherHealthModule: HealthModule, damageIncreasers: Array[float] = [], damageMultiplyers: Array[float] = [], customBaseDamage: float = baseDamage):
 	otherHealthModule.decreaseHealth(calculateDamage(damageIncreasers, damageMultiplyers, customBaseDamage))
 
 ##Deals damage (calculated by the [method DamageModule.calculateDamage] method) to a damage module 
 ##using the [method DamageModule.takeDamage] method
-func dealDamageToDamageModule(otherDamageModule: DamageModule, damageIncreasers: Array[float] = [], damageMultiplyers: Array[float] = [], customBaseDamage: float = damageDealt):
+func dealDamageToDamageModule(otherDamageModule: DamageModule, damageIncreasers: Array[float] = [], damageMultiplyers: Array[float] = [], customBaseDamage: float = baseDamage):
 	otherDamageModule.takeDamage(calculateDamage(damageIncreasers, damageMultiplyers, customBaseDamage))
 
-##calculates damage dealt based on the base amount of damage, modified by the modifiers (if passed)
+##Calculates damage dealt based on the base amount of damage, modified by the modifiers (if passed)
 ##and the critical function (if enabled)
-func calculateDamage(damageIncreasers: Array[float] = [], damageMultiplyers: Array[float] = [], customBaseDamage: float = damageDealt) -> float:
+func calculateDamage(damageIncreasers: Array[float] = [], damageMultiplyers: Array[float] = [], customBaseDamage: float = baseDamage) -> float:
 	# Add the increasers
 	for i in damageIncreasers:
 		customBaseDamage += i
@@ -83,3 +83,17 @@ func critDamage(damage: float) -> float:
 ##Calculates crit chance
 func doCrit() -> bool:
 	return randf() > (critChance/100)
+
+#region Setters
+func setBaseDamage(amount: float):
+	baseDamage = amount
+
+func setCritMultiplyValue(amount: float):
+	critMultiplyValue = amount
+
+func setCritIncrementValue(amount: float):
+	critIncrementValue = amount
+
+func setCritChance(amount: float):
+	critChance = amount
+#endregion

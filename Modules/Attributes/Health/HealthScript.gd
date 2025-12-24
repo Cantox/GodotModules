@@ -1,8 +1,8 @@
 class_name HealthModule extends Node
-##A modules that handles a health attribute
+##A modules that handles a [param health] attribute
 ##
-##Allows to increment and decrement health. Emits a signal 
-##when health gets to 0
+##Allows to increment and decrement [param health]. Emits the signal [signal HealthModule.healthIs0] 
+##when [param health] gets to 0
 
 ##The maximum amount of health
 @export var MaxHealth: float = 100

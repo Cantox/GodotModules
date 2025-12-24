@@ -1,14 +1,13 @@
-class_name Velocity2dModule extends Node2D
-##A module that handles the variation of a [CharacterBody2D]'s [param velocity]
+class_name Velocity3dModule extends Node3D
+##A module that handles the variation of a [CharacterBody3D]'s [param velocity]
 ##
 ##A curve is implemented to customize the accelleration of the node [br][br]
 ##
 ##Use the "accellerate" / "decellerate" functions to change the [param velocity] using the accelleration / friction. 
-##Use the "move" function to change the [param velocity] without using the accelleration / decelleration
-
+##Use the "move" function to change the [paran velocity] without using the accelleration / decelleration
 
 ##The node on which the module's operations are applied
-@export var controlledNode: CharacterBody2D
+@export var controlledNode: CharacterBody3D
 
 @export_group("Variables")
 ##The maximum [param velocity] value, measured in m/s
@@ -43,22 +42,22 @@ func _physics_process(_delta: float) -> void:
 #region Accelleration functions
 ##Changes gradually the [param velocity] of the controlled node (using accelleration and curve) 
 ##to make it move to the given position
-func accellerateToPos(pos: Vector2):
+func accellerateToPos(pos: Vector3):
 	accellerateInDirection(controlledNode.global_position.direction_to(pos))
 
 ##Changes gradually the [param velocity] of the controlled node (using friction and curve) 
 ##to make it decellerate and stop at the given position
-func decellerateToPos(pos: Vector2):
+func decellerateToPos(pos: Vector3):
 	decellerateInDirection(controlledNode.global_position.direction_to(pos))
 
 ##Changes gradually the [param velocity] of the controlled node (using accelleration and curve) 
 ##to make it move in the given direction
-var lastDir := Vector2(0,0)
-func accellerateInDirection(dir: Vector2):
+var lastDir := Vector3(0,0,0)
+func accellerateInDirection(dir: Vector3):
 	dir = dir.normalized()
 	
 	# Interpolate between 0 and maxSpeed based on the accelleration curve. Multiply the value with the dir. Modify the curveOffset by the accell/friction to move along the curve
-	if dir != Vector2(0,0):
+	if dir != Vector3(0,0,0):
 		controlledNode.velocity = interpolate(0.0,maxSpeed,accellerationCurve.sample(curveOffset)) * dir
 		curveOffset += accellCurveStep
 		lastDir = dir
@@ -69,7 +68,7 @@ func accellerateInDirection(dir: Vector2):
 
 ##Changes gradually the [param velocity] of the controlled node (using friction and curve) 
 ##to make it slow down while moving in the given direction
-func decellerateInDirection(dir: Vector2):
+func decellerateInDirection(dir: Vector3):
 	controlledNode.velocity = interpolate(0.0,maxSpeed,accellerationCurve.sample(curveOffset)) * dir
 	curveOffset -= frictionCurveStep
 	
@@ -83,28 +82,32 @@ func interpolate(a,b,t):
 #region Move functions (no accelleration)
 ##Changes the [param velocity] of the controlled node
 ##to make it move to the given position
-func moveToPos(pos: Vector2):
+func moveToPos(pos: Vector3):
 	moveInDirection(controlledNode.global_position.direction_to(pos))
 
 ##Changes the [param velocity] of the controlled node
 ##to make it move in the given direction
-func moveInDirection(dir: Vector2):
+func moveInDirection(dir: Vector3):
 	dir = dir.normalized()
 	controlledNode.velocity = maxSpeed * dir
 #endregion
 
 #region Apply velocity functions
 ##Applies the given [param velocity]
-func applyVelocity(vel: Vector2):
+func applyVelocity(vel: Vector3):
 	controlledNode.velocity = vel
 
-##Applies the given y [param velocity]
-func applyVerticalVelocity(vel: float):
+##Applies the given Y [param velocity]
+func applyVelocityY(vel: float):
 	controlledNode.velocity.y = vel
 
-##Applies the given x [param velocity]
-func applyHorizontalVelocity(vel: float):
+##Applies the given X [param velocity]
+func applyVelocityX(vel: float):
 	controlledNode.velocity.x = vel
+
+##Applies the given Z [param velocity]
+func applyVelocityZ(vel: float):
+	controlledNode.velocity.z = vel
 #endregion
 
 #region Setters

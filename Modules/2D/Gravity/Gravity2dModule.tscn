@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://62nmao0hc50c"]
+
+[ext_resource type="Script" uid="uid://bcup8jjpa384d" path="res://Godot-modules/Modules/2D/Gravity/Gravity2dScript.gd" id="1_7nn7i"]
+
+[node name="Gravity2dModule" type="Node2D"]
+script = ExtResource("1_7nn7i")
