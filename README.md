@@ -40,6 +40,7 @@ This project follows a **composition-over-inheritance** approach, leveraging God
 <summary><strong>3D</strong></summary>
     <ul>
         <li>Velocity</li>
+        <li>Gravity</li>
         <li>Basic first person controller</li>
     </ul>
 </details>

@@ -47,6 +47,9 @@ var mouseSensitivity := 0.005
 @onready var jKey := jumpKey
 
 func _ready() -> void:
+	if controlledNode == null or velocity3dModule == null:
+		get_tree().quit(1)
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(_delta: float) -> void:
