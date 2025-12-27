@@ -16,6 +16,7 @@ This project follows a **composition-over-inheritance** approach, leveraging God
 
 ### 3D Modules
 - **Velocity**: Modifies the velocity of a `CharacterBody3D` node. Acceleration and acceleration curves are supported.
+- **Basic first person controller**: A first person controller that implements basic movement and jumping
 
 ### Attribute Modules
 - **Health**: Manages a health value with increment/decrement support. Emits a `death` signal when health reaches `0`.
@@ -39,6 +40,7 @@ This project follows a **composition-over-inheritance** approach, leveraging God
 <summary><strong>3D</strong></summary>
     <ul>
         <li>Velocity</li>
+        <li>Basic first person controller</li>
     </ul>
 </details>
 
