@@ -63,10 +63,10 @@ This project follows a **composition-over-inheritance** approach, leveraging God
 
 - Copy the **corresponding module folder** (containing the `.tscn` scene and `.gd` script) into your project folder.
 
-- **Open** the module’s scene (`.tscn` file).
+- **Open** the module’s scene (`.tscn` file) to setup / customize the parameters and make sure there are no loading errors.
 
     <details>
-    <summary><strong>If dependency errors appear and the script won’t load</strong></summary>
+    <summary><strong>! If dependency errors appear and the script won’t load</strong></summary>
 
     - Open the scene anyway (without loading the script)
     - Reassociate the script with the module *(drag the `.gd` file onto the module’s node)*
