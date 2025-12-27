@@ -25,7 +25,7 @@ This project follows a **composition-over-inheritance** approach, leveraging God
 
 ---
 
-## 📌 COMPLETE LIST
+## 📌 Complete List
 
 <details>
 <summary><strong>2D</strong></summary>
