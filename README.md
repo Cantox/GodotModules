@@ -6,17 +6,49 @@ This project follows a **composition-over-inheritance** approach, leveraging God
 
 ---
 
-## ⭐ Features
+## ⭐ Main Features
 
 ### 2D Modules
 - **Velocity**: Modifies the velocity of a `CharacterBody2D` node. Acceleration and acceleration curves are supported.
 
-- **Movement**: Requires the **Velocity** module. Takes an input (axis or mouse position) and moves a `CharacterBody2D` using the linked velocity module.
+- **Movement**: Requires the **Velocity** module. Reads an input (axis or mouse position) and moves a `CharacterBody2D` using the linked velocity module.
+
+
+### 3D Modules
+- **Velocity**: Modifies the velocity of a `CharacterBody3D` node. Acceleration and acceleration curves are supported.
 
 ### Attribute Modules
 - **Health**: Manages a health value with increment/decrement support. Emits a `death` signal when health reaches `0`.
 
 - **Damage**: Requires the **Health** module. Supports dealing and receiving damage, damage modifiers, and critical attacks.
+
+---
+
+## 📌 COMPLETE LIST
+
+<details>
+<summary><strong>2D</strong></summary>
+    <ul>
+        <li>Velocity</li>
+        <li>Gravity</li>
+        <li>Movement</li>
+    </ul>
+</details>
+
+<details>
+<summary><strong>3D</strong></summary>
+    <ul>
+        <li>Velocity</li>
+    </ul>
+</details>
+
+<details>
+<summary><strong>ATTRIBUTES</strong></summary>
+    <ul>
+        <li>Health</li>
+        <li>Damage</li>
+    </ul>
+</details>
 
 ---
 
