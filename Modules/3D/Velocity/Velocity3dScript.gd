@@ -74,6 +74,32 @@ func decellerateInDirection(dir: Vector3):
 	
 	curveOffset = clampf(curveOffset,0,1)
 
+##Changes gradually the [param velocity] of the controlled node (using accelleration and curve) 
+##to make it move in the given direction
+var lastDirHoriz := Vector2(0,0)
+func accellerateInDirectionHorizontally(dir: Vector2):
+	dir = dir.normalized()
+	
+	# Interpolate between 0 and maxSpeed based on the accelleration curve. Multiply the value with the dir. Modify the curveOffset by the accell/friction to move along the curve
+	if dir != Vector2(0,0):
+		controlledNode.velocity.x = interpolate(0.0,maxSpeed,accellerationCurve.sample(curveOffset)) * dir.x
+		controlledNode.velocity.z = interpolate(0.0,maxSpeed,accellerationCurve.sample(curveOffset)) * dir.y
+		curveOffset += accellCurveStep
+		lastDirHoriz = dir
+	else:
+		decellerateInDirectionHorizontally(lastDirHoriz)
+	
+	curveOffset = clampf(curveOffset,0,1)
+
+##Changes gradually the [param velocity] of the controlled node (using friction and curve) 
+##to make it slow down while moving in the given direction
+func decellerateInDirectionHorizontally(dir: Vector2):
+	controlledNode.velocity.x = interpolate(0.0,maxSpeed,accellerationCurve.sample(curveOffset)) * dir.x
+	controlledNode.velocity.z = interpolate(0.0,maxSpeed,accellerationCurve.sample(curveOffset)) * dir.y
+	curveOffset -= frictionCurveStep
+	
+	curveOffset = clampf(curveOffset,0,1)
+
 ##Interpolation formula that returns a fraction (based on t) of the distance between points a and b
 func interpolate(a,b,t):
 	return a + (b - a) * t # Initial pos (a) + a fraction (t) of the distance between initial and final pos (a,b)

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc3i6y3xx70q6"]
+
+[ext_resource type="Script" uid="uid://btgvnyfi0amiv" path="res://Godot-modules/Modules/3D/Basic_First_Person_Controller/BasicFirstPersonControllerScript.gd" id="1_aaw4s"]
+
+[node name="BasicFirstPersonControllerModule" type="Node3D"]
+script = ExtResource("1_aaw4s")
+
+[node name="CameraHolder" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Camera" type="Camera3D" parent="CameraHolder"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48293483, -0.33529282)
